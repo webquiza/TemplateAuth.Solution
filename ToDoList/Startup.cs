@@ -32,6 +32,18 @@ namespace ToDoList
       services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ToDoListContext>()
                 .AddDefaultTokenProviders();
+
+      // This will override default user requirements. Only use during development phase.
+   
+      services.Configure<IdentityOptions>(options =>
+      {
+          options.Password.RequireDigit = false;
+          options.Password.RequiredLength = 0;
+          options.Password.RequireLowercase = false;
+          options.Password.RequireNonAlphanumeric = false;
+          options.Password.RequireUppercase = false;
+          options.Password.RequiredUniqueChars = 0;
+      });
     }
 
     public void Configure(IApplicationBuilder app)
